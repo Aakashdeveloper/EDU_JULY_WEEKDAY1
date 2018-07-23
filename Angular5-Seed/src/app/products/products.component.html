@@ -45,7 +45,10 @@
                         <td>{{product.productCode | myupper:'upper'}}</td>
                         <td>{{product.releaseDate}}</td>
                         <td>{{product.price | addValue | currency:"GBP"}}</td>
-                        <td>{{product.starRating}}</td>
+                        <td>
+                                <app-star [rating]="product.starRating"
+                                    (ratingClicked)="onDataRecive($event)"></app-star>
+                        </td>
                     </tr>
                 </tbody>
             </table>
