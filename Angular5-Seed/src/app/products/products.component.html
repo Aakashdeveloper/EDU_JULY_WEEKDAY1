@@ -4,7 +4,9 @@
     </div>
     <div class='panel-body'>
         <div class='row'>
-            <div class='col-md-2'>FilterBy:</div>
+            <div class='col-md-2'>
+                <p>FilterBy:</p>
+            </div>
             <div class='col-md-4'>
                 <input type='text' [(ngModel)]="filterText"/>
             </div>
@@ -33,15 +35,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let product of products">
+                    <tr  *ngFor="let product of products | productFilter:filterText">
                         <td>
                             <img [src]="product.imageUrl"  
-                                 *ngIf="showImage"/>
+                                 *ngIf="showImage"
+                                 [style.width.px]="imageWidth"/>
                         </td>
-                        <td>{{product.productName | myupper:'lower'}}</td>
+                        <td style="font-size:30px">{{product.productName | myupper:'lower'}}</td>
                         <td>{{product.productCode | myupper:'upper'}}</td>
                         <td>{{product.releaseDate}}</td>
-                        <td>{{product.price | currency:"GBP"}}</td>
+                        <td>{{product.price | addValue | currency:"GBP"}}</td>
                         <td>{{product.starRating}}</td>
                     </tr>
                 </tbody>
