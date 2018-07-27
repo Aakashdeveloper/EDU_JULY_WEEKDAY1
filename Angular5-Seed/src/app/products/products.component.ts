@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
     filterText: String;
     imageWidth: Number = 50;
     products: IProduct[];
+    errorMessage: String;
 
     constructor(private _productService: ProductService) {}
 
@@ -25,7 +26,9 @@ export class ProductComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.products = this._productService.getProduct();
+        this._productService.getProduct()
+            .subscribe((data) => this.products = data,
+            (err) => this.errorMessage = err);
     }
 
     onDataRecive(message: string) {

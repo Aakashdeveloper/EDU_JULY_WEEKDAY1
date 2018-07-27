@@ -16,7 +16,7 @@
                 <h3>Filtered By:{{filterText}}</h3>
             </div>
         </div>
-        {{showImage}}                        
+        {{errorMessage}}                        
         <div class='table-responsive' *ngIf="products && products.length">
             <table class='table'>
                 <thead>
@@ -41,7 +41,12 @@
                                  *ngIf="showImage"
                                  [style.width.px]="imageWidth"/>
                         </td>
-                        <td style="font-size:30px">{{product.productName | myupper:'lower'}}</td>
+                        <td style="font-size:20px">
+                            <a [routerLink]="['/product',product.productId]"
+                                [queryParams]="{name:product.productName,desc:product.description,image:product.imageUrl}">
+                                {{product.productName | myupper:'lower'}}
+                            </a>
+                        </td>
                         <td>{{product.productCode | myupper:'upper'}}</td>
                         <td>{{product.releaseDate}}</td>
                         <td>{{product.price | addValue | currency:"GBP"}}</td>
