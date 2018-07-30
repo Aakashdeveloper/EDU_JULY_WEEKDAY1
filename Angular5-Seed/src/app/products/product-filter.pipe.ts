@@ -9,8 +9,8 @@ import { IProduct } from './products.model' ;
 export class ProductValueFilter implements PipeTransform {
     transform(value: IProduct[], userText: string) {
         userText = userText ? userText.toLowerCase() : null;
-        return userText ? value.filter((aakash: IProduct) =>
-            aakash.productName.toLowerCase().indexOf(userText) !== -1) : value;
+        return userText ? value.filter((product: IProduct) =>
+            product.productName.toLowerCase().indexOf(userText) !== -1) : value;
         }
     }
 
