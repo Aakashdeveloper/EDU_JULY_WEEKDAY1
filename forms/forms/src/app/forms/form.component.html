@@ -3,7 +3,7 @@
 
     </div>
     <div class="panel-body">
-        <form>
+        <form  #form="ngForm" (submit)="submitForm(form)">
             <div class="form-group">
                     <label class="control-label" for="fname">
                         FirstName
@@ -12,8 +12,16 @@
                            type="text"
                            name="firstName"
                            id="fname"
-                           [(ngModel)]="model.firstName">
+                           required
+                           #firstName="ngModel"
+                           [ngModel]="model.firstName"
+                           (ngModelChange)="firstToUpper($event)">
+                    <div class="alert alert-danger" *ngIf="firstName.invalid">
+                        Please enter firstName
+                    </div>
             </div>
+            <h3>Classes</h3>
+            <h3>{{firstName.invalid}}</h3>
             <div class="form-group">
                     <label class="control-label" for="lname">
                         LastName
@@ -22,7 +30,27 @@
                            type="text"
                            name="lastName"
                            id="lname"
+                           minlength="5"
+                           #lastName="ngModel"
                            [(ngModel)]="model.lastName">
+                        <div class="alert alert-danger" *ngIf="lastName.invalid">
+                           Min length is 5
+                        </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="email">
+                    Email
+                </label>
+                <input class="form-control"
+                       type="text"
+                       name="email"
+                       id="email"
+                       pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                       #email="ngModel"
+                       [(ngModel)]="model.email">
+                    <div class="alert alert-danger" *ngIf="email.invalid">
+                       Enter valid email
+                    </div>
             </div>
             <div class="checkbox">
                 <label>
@@ -59,7 +87,7 @@
                     </option>
                 </select>
             </div>
-            <button type="button" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
 </div>
